@@ -6,3 +6,7 @@ h3 {
     color : seagreen;
     font-weight : bold;
 }
+
+li.special {
+    color : skyblue
+}
