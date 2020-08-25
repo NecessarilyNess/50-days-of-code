@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -136,5 +136,147 @@ function App2(props) {
 
 ReactDOM.render(
   <App2 season = "autumn" />,
+  document.getElementById("root")
+);
+
+// useState
+
+function App3() {
+  const [year, setYear] = useState("2050")
+  const [manager, setManager] = useState("Alex")
+  const [status, setStatus] = useState("Open") //returns the state when the app is opened and a function to update the state.
+  return(
+    <>
+    <div>
+      <h1>{year}</h1> 
+      <button onClick ={() => setYear(parseInt(year) + 1)}>
+        New Year!
+      </button>
+    </div>
+    <div>
+      <h1>Manager on duty: {manager}</h1>
+      <button onClick ={() => setManager("Vanessa")}>
+        New Manager
+      </button>
+    </div>
+    <div>
+      <h1>Status: {status}</h1>
+      <button onClick ={() => setStatus("Open")}>
+        Open
+      </button>
+      <button onClick ={() => setStatus("Back in 5")}>
+        Break
+      </button>
+      <button onClick ={() => setStatus("Closed")}>
+        Closed
+      </button>
+    </div>
+    </>
+  );
+}
+
+ReactDOM.render(
+  <App3 />,
+  document.getElementById("root")
+); 
+
+
+//useEffect
+
+//Fetch data 
+function GitHubUser({login}) {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${login}`)
+    .then(res => res.json())
+    .then(setData)
+    .catch(console.error)
+  }, []);
+
+  if (data) {
+    return <div>
+      <h1 id = "heading">{data.login} 
+        <img src = {data.avatar_url} width={40} /> 
+      </h1>
+    </div>;
+  }
+  return null;
+}
+
+
+function App5() {
+  return <GitHubUser login = "NecessarilyNess" />
+}
+
+ReactDOM.render(
+  <App5 />,
+  document.getElementById("root")
+)
+
+
+function App4() {
+  const [val, setVal] = useState(""); //this is a state variable
+  const [val2, setVal2] = useState("");
+
+  useEffect(() => {
+    console.log(`field 1: ${val}`)
+  }, [val])
+  useEffect(() => {
+    console.log(`field 2: ${val2}`)
+  }, [val2])
+  return(
+    <>
+    <label>
+      Favourite Phrase:
+      <input value = {val} onChange= {e => setVal(e.target.value)}/>
+    </label>
+    <br/>
+    <label>
+      Second Favourite Phrase:
+      <input value = {val2} onChange= {e => setVal2(e.target.value)}/>
+    </label>
+    </>
+  )
+}
+
+ReactDOM.render(
+  <App4 />,
+  document.getElementById("root")
+);
+
+/*function Checkbox() {
+  const [checked, setChecked] = useState(false)
+  useEffect(() => {
+    alert(`checked: ${checked.toString()}`)
+  });
+  return(
+    <>
+      <input type = "checkbox" value = {checked} onChange= {() => setChecked(checked => !checked)}/>
+      {checked ? "checked" : "not checked"}
+    </>
+  )
+}
+
+ReactDOM.render(
+  <Checkbox />,
+  document.getElementById("root")
+);
+*/
+
+//useReducer
+
+function Checkbox2() {
+  const [checked, toggle] = useReducer(checked => !checked, false);
+
+  return(
+    <>
+      <input type = "checkbox" value = {checked} onChange= {toggle}/>
+      {checked ? "checked" : "not checked"}
+    </>
+  )
+}
+
+ReactDOM.render(
+  <Checkbox2 />,
   document.getElementById("root")
 );
