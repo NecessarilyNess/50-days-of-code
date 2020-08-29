@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## This 'project'
+
+In this project, I'll be following a LinkedIn Learning course to produce an appointment page for a vet surgery using react and a 
+bit of bootstrap although the focus is on react.
 ## Available Scripts
 
 In the project directory, you can run:
