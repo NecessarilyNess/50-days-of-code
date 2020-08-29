@@ -6,6 +6,7 @@ HTML, CSS, JavaScript and of course Git.
 So far in this repo, there is my work for the following courses:
 - Learning react.js (LinkedIn Learning)
 - React.js: Building an Interface (LinkedIn Learning)
+- Bootstrap 4: Essential Training (LinkedIn Learning)
 
 
 ## Contributing
